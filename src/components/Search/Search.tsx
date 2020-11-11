@@ -1,18 +1,72 @@
-// Input.js
-import React from 'react';
+import { Input } from '@material-ui/core';
+import React, { useState } from 'react';
+function Search({ handleCallback }) {
 
-function Search({ loading, onChange }) {
-  return (
-    <div className="input-group mb-3 mt-3">
-      <input type="text" className="form-control" placeholder="Search..." aria-label="Search icons" aria-describedby="basic-addon2" onChange={onChange} />
-      <div className="input-group-append">
-        {loading ?
-          <span className="input-group-text" id="basic-addon2">Loading...</span> :
-          <span className="input-group-text" id="basic-addon2">Ready</span>
-        }
-      </div>
-    </div>
-  );
+
+  const [updatedData, setUpdatedData] = useState([])
+
+  async function getPokemon(info): Promise<any> {
+
+    try {
+      let result = await fetch(`https://pokeapi.co/api/v2/berry/${info}`, {
+        method: "GET"
+      });
+      const res = await result.json()
+
+
+      console.log(res.name)
+      handleCallback([{name:res.name}])
+
+
+
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  async function getBeer(name): Promise<any> {
+    try {
+      let res = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${name}`, {
+        method: "GET"
+      });
+
+
+      const result = await res.json();
+      console.log(result)
+      if (result.length > 0) {
+        handleCallback(result)
+      }
+      console.log(updatedData)
+      //TODO make suitable function for delegating state management
+
+    } catch (err) {
+    }
+
+  }
+
+
+
+  const handleKeyDown = (e) => {
+    e.persist();
+
+    if (e.key === 'Enter') {
+      const name = e.target.value;
+      console.log(e.target.value)
+      setTimeout(() => {
+        getPokemon(name)
+        getBeer(name)
+        handleCallback(updatedData)
+      }, 1000);
+
+    }
+  }
+  return(
+    <Input id="standard-search" fullWidth placeholder="Search field" type="search" onKeyDown={handleKeyDown} />
+  )
 }
+
+
+
 
 export default Search;
