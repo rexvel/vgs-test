@@ -1,13 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Search from 'components/Beers/BeersItemsSearch';
-import Result from 'components/Beers/BeersList';
 import React, { useCallback, useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import BeersItemsSearch from 'components/Beers/BeersItemsSearch';
+import Result from 'components/Beers/BeersList';
 import { getData } from 'utils/request-data';
-
+import { BEER_URL, POKEMON_URL } from './constants/apiConstants';
 const App = () => {
 
-  const pokemonUrl = "https://pokeapi.co/api/v2/ability/?limit=50&offset=50/"
-  const beerUrl = "https://api.punkapi.com/v2/beers"
   const useStyles = makeStyles((theme) => ({
     root: {
       margin: "200px auto",
@@ -19,45 +17,36 @@ const App = () => {
       padding: theme.spacing(2),
     },
   }));
-  const classes = useStyles();
 
+  const classes = useStyles();
 
   const [pokemonArray, setPokemonArray] = useState([]);
   const [beerArray, setBeerArray] = useState([]);
-  const [data, setData] = useState([])
+  const [beersList, setbeersList] = useState([])
 
-
-  const handleCallback = useCallback(childData => {
-
-    console.log(childData)
-    if (childData) {
-      setData(childData)
-    }
-
-
-  }, [data])
+  const updateBeerList = childData =>  setbeersList(childData)
 
   useEffect(() => {
-    getData(beerUrl, setBeerArray)
-    getData(pokemonUrl, setPokemonArray)
+    getData(BEER_URL, setBeerArray)
+    getData(POKEMON_URL, setPokemonArray)
   }, []);
 
   useEffect(() => {
     const arrayItems = [].concat.apply([], pokemonArray.map((i, index) => [i, beerArray[index]]));
-    setData(arrayItems);
+    setbeersList(arrayItems);
   }, [pokemonArray, beerArray])
 
 
 
   console.log(pokemonArray)
   console.log(beerArray)
-  console.log(data)
+  console.log(beersList)
 
   return (
 
     <div className={classes.root}>
-      <Search handleCallback={handleCallback} />
-      <Result items={data} />
+      <BeersItemsSearch updateBeerList={updateBeerList} />
+      <Result beersList={beersList} />
     </div>
   );
 }
