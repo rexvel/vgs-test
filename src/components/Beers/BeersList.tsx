@@ -1,9 +1,9 @@
 import Grid from '@material-ui/core/Grid';
-import { Item } from 'components/Item/Item';
+import { Item } from 'components/Beers/BeersListItem';
 import React from "react";
 
 
-const Result = ({ items }) => {
+const BeersList = ({ items }) => {
 console.log(items)
 
 
@@ -26,4 +26,4 @@ console.log(items)
   );
 }
 
-export default Result;
+export default BeersList;

@@ -17,9 +17,6 @@ function Search({ handleCallback }) {
       console.log(res.name)
       handleCallback([{name:res.name}])
 
-
-
-
     } catch (err) {
       console.error(err)
     }
