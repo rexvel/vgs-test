@@ -7,7 +7,7 @@ function Search({ updateBeerList }) {
   const [updatedData, setUpdatedData] = useState([])
   const [userQuery, setUserQuery] = useState("");
 
-  const debouncedGetPokemon= useRef(_.debounce(info => getPokemon(info), 1000)).current;
+  const debouncedGetPokemon = useRef(_.debounce(info => getPokemon(info), 1000)).current;
   const debouncedGetBeer = useRef(_.debounce(info => getBeer(info), 1000)).current;
 
   const onChange = e => {
@@ -23,7 +23,6 @@ function Search({ updateBeerList }) {
       let result = await fetch(`https://pokeapi.co/api/v2/berry/${info}`, {
         method: "GET"
       });
-
 
       const res = await result.json()
 
@@ -50,7 +49,7 @@ function Search({ updateBeerList }) {
       console.log(updatedData)
 
     } catch (err) {
-    }
+  }
 
   }
 

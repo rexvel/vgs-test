@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BeersItemsSearch from 'components/Beers/BeersItemsSearch';
 import Result from 'components/Beers/BeersList';
