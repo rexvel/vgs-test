@@ -3,8 +3,8 @@ import { Item } from 'components/Item/Item';
 import React from "react";
 
 
-
 const Result = ({ items }) => {
+console.log(items)
 
 
   console.log(items)
@@ -16,7 +16,8 @@ const Result = ({ items }) => {
       alignItems="center"
       justify="flex-start"
       style={{ minHeight: '100vh' }}>
-      {items.map(item => {
+      {items.map((item, index) => {
+        console.log(index)
         return (
           <Item item={item} />
         )

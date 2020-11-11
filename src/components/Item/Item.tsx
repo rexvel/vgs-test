@@ -42,8 +42,8 @@ export const UpdatedItem = ({ item }) => {
   const { name } = item;
 
   return (
-    <Box  m={3} width="100%" >
-      <Grid className={classes.item}container wrap="nowrap" spacing={5}>
+    <Box m={3} width="100%" >
+      <Grid className={classes.item} container wrap="nowrap" spacing={5}>
         <Grid >
           <Avatar>W</Avatar>
         </Grid>
