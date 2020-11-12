@@ -21,3 +21,39 @@ export async function getData(url: string, setFunction: Function): Promise<any> 
     console.error(`Catched error: ${err}`)
   }
 }
+
+
+export async function getPokemon(exactParam: string, updateData: Function) {
+
+  try {
+    let result = await fetch(`https://pokeapi.co/api/v2/berry/${exactParam}`, {
+      method: "GET"
+    });
+
+    const res = await result.json()
+
+    console.log(res.name)
+    updateData([{ name: res.name }])
+
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export async function getBeer(exactParam: string, updateData: Function) {
+  try {
+    let res = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${exactParam}`, {
+      method: "GET"
+    });
+
+
+    const result = await res.json();
+    console.log(result)
+    if (result.length > 0) {
+      updateData(result)
+    }
+
+  } catch (err) {
+    console.error(err)
+  }
+}
