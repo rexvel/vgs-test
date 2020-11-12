@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "target": "es2015",
@@ -19,8 +19,8 @@
     "outDir": "dist",
     "baseUrl": "src",
     "typeRoots": [
-      "./types",
-      "node_modules/@types"
+      "../node_modules/@types",
+      "../@types"
     ],
     "strictNullChecks": true,
     "allowJs": true,

@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import BeersItemsSearch from 'components/Beers/BeersItemsSearch';
+import BeersSearch from 'components/Beers/BeersSearch';
 import BeersList from 'components/Beers/BeersList';
-import { getData } from 'utils/request-data';
-import { BEER_URL, POKEMON_URL } from './constants/apiConstants';
-const App = () => {
+
+
+interface AppProps {
+  updateBeerList: Function,
+  beersList: Array<any>,
+}
+
+const App: React.FC<AppProps> = ({ updateBeerList, beersList }: AppProps) => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,38 +25,10 @@ const App = () => {
 
   const classes = useStyles();
 
-  const [pokemonArray, setPokemonArray] = useState([]);
-  const [beerArray, setBeerArray] = useState([]);
-  const [beersList, setbeersList] = useState([])
-
-  const updateBeerList = childData => setbeersList(childData)
-
-  useEffect(() => {
-    getData(BEER_URL, setBeerArray)
-    getData(POKEMON_URL, setPokemonArray)
-  }, []);
-
-  useEffect(() => {
-    const arrayItems = [];
-
-    pokemonArray.forEach((i, idx) => {
-      arrayItems.push(i);
-      arrayItems.push(beerArray[idx]);
-    });
-    setbeersList(arrayItems);
-
-  }, [pokemonArray, beerArray])
-
-
-
-  console.log(pokemonArray)
-  console.log(beerArray)
-  console.log(beersList)
-
   return (
 
     <div className={classes.root}>
-      <BeersItemsSearch updateBeerList={updateBeerList} />
+      <BeersSearch updateBeerList={updateBeerList} />
       <BeersList beersList={beersList} />
     </div>
   );
