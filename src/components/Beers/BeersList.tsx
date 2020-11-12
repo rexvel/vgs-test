@@ -16,7 +16,7 @@ console.log(beersList)
       alignItems="center"
       justify="flex-start"
       style={{ minHeight: '100vh' }}>
-      {beersList.map((item, ) => {
+      {beersList.map((item) => {
         return (
           <Item item={item} key={item.name} />
         )

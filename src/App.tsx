@@ -1,7 +1,7 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BeersItemsSearch from 'components/Beers/BeersItemsSearch';
-import Result from 'components/Beers/BeersList';
+import BeersList from 'components/Beers/BeersList';
 import { getData } from 'utils/request-data';
 import { BEER_URL, POKEMON_URL } from './constants/apiConstants';
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
   const [beerArray, setBeerArray] = useState([]);
   const [beersList, setbeersList] = useState([])
 
-  const updateBeerList = childData =>  setbeersList(childData)
+  const updateBeerList = childData => setbeersList(childData)
 
   useEffect(() => {
     getData(BEER_URL, setBeerArray)
@@ -32,8 +32,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const arrayItems = [].concat.apply([], pokemonArray.map((i, index) => [i, beerArray[index]]));
+    const arrayItems = [];
+
+    pokemonArray.forEach((i, idx) => {
+      arrayItems.push(i);
+      arrayItems.push(beerArray[idx]);
+    });
     setbeersList(arrayItems);
+
   }, [pokemonArray, beerArray])
 
 
@@ -46,7 +52,7 @@ const App = () => {
 
     <div className={classes.root}>
       <BeersItemsSearch updateBeerList={updateBeerList} />
-      <Result beersList={beersList} />
+      <BeersList beersList={beersList} />
     </div>
   );
 }
