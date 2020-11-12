@@ -1,7 +1,13 @@
 import { Input } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import _ from "lodash";
-function Search({ updateBeerList }) {
+
+
+interface IBeersItem {
+  updateBeerList: Function,
+}
+
+const Search = ({ updateBeerList }: IBeersItem) => {
 
 
   const [updatedData, setUpdatedData] = useState([])
@@ -10,14 +16,14 @@ function Search({ updateBeerList }) {
   const debouncedGetPokemon = useRef(_.debounce(info => getPokemon(info), 1000)).current;
   const debouncedGetBeer = useRef(_.debounce(info => getBeer(info), 1000)).current;
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const typedValue = e.target.value;
     setUserQuery(typedValue);
     debouncedGetBeer(typedValue);
     debouncedGetPokemon(typedValue);
   };
 
-  async function getPokemon(info) {
+  async function getPokemon(info: string) {
 
     try {
       let result = await fetch(`https://pokeapi.co/api/v2/berry/${info}`, {
@@ -34,7 +40,7 @@ function Search({ updateBeerList }) {
     }
   }
 
-  async function getBeer(name): Promise<any> {
+  async function getBeer(name: string): Promise<any> {
     try {
       let res = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${name}`, {
         method: "GET"
@@ -49,7 +55,7 @@ function Search({ updateBeerList }) {
       console.log(updatedData)
 
     } catch (err) {
-  }
+    }
 
   }
 

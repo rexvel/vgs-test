@@ -1,4 +1,4 @@
-export async function getData(url, setFunction): Promise<any> {
+export async function getData(url: string, setFunction: Function): Promise<any> {
   try {
 
     let res = await fetch(url, {

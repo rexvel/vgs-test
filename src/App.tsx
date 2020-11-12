@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BeersItemsSearch from 'components/Beers/BeersItemsSearch';
 import BeersList from 'components/Beers/BeersList';
 import { getData } from 'utils/request-data';
-import { BEER_URL, POKEMON_URL } from './constants/apiConstants';
-const App = () => {
+import { apiUrl } from './constants/apiConstants';
+
+const App: React.FC = () => {
+
+  const { POKEMON_URL, BEER_URL } = apiUrl
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +27,7 @@ const App = () => {
   const [beerArray, setBeerArray] = useState([]);
   const [beersList, setbeersList] = useState([])
 
-  const updateBeerList = childData => setbeersList(childData)
+  const updateBeerList = (childData: SetStateAction<never[]>) => setbeersList(childData)
 
   useEffect(() => {
     getData(BEER_URL, setBeerArray)
@@ -32,7 +35,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const arrayItems = [];
+    const arrayItems: React.SetStateAction<never[]> = [];
 
     pokemonArray.forEach((i, idx) => {
       arrayItems.push(i);

@@ -4,12 +4,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from "react";
 
 
+interface INestedBeerItem {
+  name: string,
+}
 
+interface IBeersItem {
+  item: INestedBeerItem,
+}
 
-export const Item = ({ item }) => {
+export const BeersListItem: React.FC<IBeersItem> = ({ item }: IBeersItem) => {
 
   const loading = item !== undefined;
-
 
   return (
     <>
@@ -18,15 +23,12 @@ export const Item = ({ item }) => {
           ? <UpdatedItem item={item} />
           : <p>loading</p>
       }
-
     </>
-
-
   );
 }
 
 
-export const UpdatedItem = ({ item }) => {
+export const UpdatedItem = ({ item }: IBeersItem) => {
 
   const useStyles = makeStyles((theme) => ({
 

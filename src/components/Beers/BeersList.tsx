@@ -1,10 +1,14 @@
 import Grid from '@material-ui/core/Grid';
-import { Item } from 'components/Beers/BeersListItem';
+import { BeersListItem } from 'components/Beers/BeersListItem';
 import React from "react";
 
 
-const BeersList = ({ beersList }) => {
-console.log(beersList)
+interface IBeerList {
+  beersList: Array<any>,
+}
+
+const BeersList = ({ beersList }: IBeerList) => {
+  console.log(beersList)
 
 
   console.log(beersList)
@@ -18,7 +22,7 @@ console.log(beersList)
       style={{ minHeight: '100vh' }}>
       {beersList.map((item) => {
         return (
-          <Item item={item} key={item.name} />
+          <BeersListItem item={item} key={item.name} />
         )
       })}
     </Grid>
