@@ -4,7 +4,6 @@ import _ from "lodash";
 function Search({ updateBeerList }) {
 
 
-  const [updatedData, setUpdatedData] = useState([])
   const [userQuery, setUserQuery] = useState("");
 
   const debouncedGetPokemon = useRef(_.debounce(info => getPokemon(info), 1000)).current;
@@ -46,7 +45,6 @@ function Search({ updateBeerList }) {
       if (result.length > 0) {
         updateBeerList(result)
       }
-      console.log(updatedData)
 
     } catch (err) {
   }
