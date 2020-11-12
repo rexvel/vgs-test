@@ -1,13 +1,13 @@
 import Grid from '@material-ui/core/Grid';
-import { Item } from 'components/Item/Item';
+import { Item } from 'components/Beers/BeersListItem';
 import React from "react";
 
 
-const Result = ({ items }) => {
-console.log(items)
+const BeersList = ({ beersList }) => {
+console.log(beersList)
 
 
-  console.log(items)
+  console.log(beersList)
   return (
     <Grid
       container
@@ -16,14 +16,13 @@ console.log(items)
       alignItems="center"
       justify="flex-start"
       style={{ minHeight: '100vh' }}>
-      {items.map((item, index) => {
-        console.log(index)
+      {beersList.map((item) => {
         return (
-          <Item item={item} />
+          <Item item={item} key={item.name} />
         )
       })}
     </Grid>
   );
 }
 
-export default Result;
+export default BeersList;

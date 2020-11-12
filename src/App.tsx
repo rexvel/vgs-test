@@ -1,16 +1,15 @@
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Result from 'components/Results/Result';
-import Search from 'components/Search/Search';
-import React, { useCallback, useEffect, useState } from 'react';
-
-
-
+import BeersItemsSearch from 'components/Beers/BeersItemsSearch';
+import BeersList from 'components/Beers/BeersList';
+import { getData } from 'utils/request-data';
+import { BEER_URL, POKEMON_URL } from './constants/apiConstants';
 const App = () => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
       margin: "200px auto",
-      width: " 30vw",
+      width: "30vw",
     },
     paper: {
       maxWidth: 400,
@@ -18,78 +17,44 @@ const App = () => {
       padding: theme.spacing(2),
     },
   }));
+
   const classes = useStyles();
 
-
-  const [pokemonArray, setPokemons] = useState([]);
+  const [pokemonArray, setPokemonArray] = useState([]);
   const [beerArray, setBeerArray] = useState([]);
-  const [data, setData] = useState([])
+  const [beersList, setbeersList] = useState([])
 
+  const updateBeerList = childData => setbeersList(childData)
 
-  const handleCallback = useCallback(childData => {
+  useEffect(() => {
+    getData(BEER_URL, setBeerArray)
+    getData(POKEMON_URL, setPokemonArray)
+  }, []);
 
-    console.log(childData)
-    if (childData){
-      setData(childData)
+  useEffect(() => {
+    const arrayItems = [];
 
-    }
-
-
-}, [data])
-
-
-  async function getPokemon(): Promise<any> {
-    try {
-      let result = await fetch("https://pokeapi.co/api/v2/ability/?limit=50&offset=50/", {
-        method: "GET"
-      });
-      const { results } = await result.json()
-      const pokemons = results.sort(() => Math.random() - Math.random()).slice(0, 5)
-      setPokemons(pokemons)
-
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-async function getBeer(): Promise<any> {
-  try {
-    let res = await fetch("https://api.punkapi.com/v2/beers", {
-      method: "GET"
+    pokemonArray.forEach((i, idx) => {
+      arrayItems.push(i);
+      arrayItems.push(beerArray[idx]);
     });
+    setbeersList(arrayItems);
 
-    const results = await res.json()
-
-    const beer = results.sort(() => Math.random() - Math.random()).slice(0, 5)
-    setBeerArray(beer)
-  } catch (err) {
-  }
-
-}
-
-useEffect(() => {
-  getPokemon();
-  getBeer();
-}, []);
-
-useEffect(() => {
-  const arrayItems = [].concat.apply([], pokemonArray.map((i, index) => [i, beerArray[index]]));
-  setData(arrayItems);
-}, [pokemonArray, beerArray])
+  }, [pokemonArray, beerArray])
 
 
 
-console.log(pokemonArray)
-console.log(beerArray)
-console.log(data)
+  console.log(pokemonArray)
+  console.log(beerArray)
+  console.log(beersList)
 
-return (
+  return (
 
-  <div className={classes.root}>
-    <Search handleCallback={handleCallback} />
-    <Result items={data} />
-  </div>
-);
+    <div className={classes.root}>
+      <BeersItemsSearch updateBeerList={updateBeerList} />
+      <BeersList beersList={beersList} />
+    </div>
+  );
 }
 
 export default App;
