@@ -1,0 +1,7 @@
+
+enum DataActionTypes {
+  GET_BEER_REQUEST_API_DATA = "GET_BEER_REQUEST_API_DATA",
+  GET_BEER_SUCCESS = 'GET_BEER_SUCCESS',
+  GET_BEER_FAILURE = 'GET_BEER_FAILURE'
+}
+export default DataActionTypes;
