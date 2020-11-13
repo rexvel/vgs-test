@@ -1,4 +1,6 @@
-import { ADD_BERRYS, SET_BERRYS } from './../actions/BeerActionCreators';
+import { berryEnum } from "../actions/DataActionTypes.enum";
+
+const { ADD_BERRYS, SET_BERRYS } = berryEnum
 
 const initialState = {
   berrys: []

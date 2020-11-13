@@ -1,25 +1,30 @@
 import React, { SetStateAction, useEffect, useState } from 'react';
+import {Router} from 'react-router-dom'
 import { getData } from 'utils/request-data';
 import apiConstants from './constants';
-import App from 'App';
-import { Provider } from "react-redux";
+import {  Provider } from "react-redux";
 import { store } from "./store/configureStore";
-
+import history from './helpers/history';
+import App from 'App';
 
 const AppContainer: React.FC = () => {
+
+  const [beersList, setbeersList] = useState([])
+
 
   const { POKEMON_URL, BEER_URL } = apiConstants
 
   const [pokemonArray, setPokemonArray] = useState([]);
   const [beerArray, setBeerArray] = useState([]);
-  const [beersList, setbeersList] = useState([])
 
-  const updateBeerList = (childData: SetStateAction<never[]>) => setbeersList(childData)
 
   useEffect(() => {
     getData(BEER_URL, setBeerArray)
     getData(POKEMON_URL, setPokemonArray)
-  }, [POKEMON_URL,BEER_URL]);
+  }, [POKEMON_URL, BEER_URL]);
+
+
+  const updateBeerList = (childData: SetStateAction<never[]>) => setbeersList(childData)
 
   useEffect(() => {
     const arrayItems: React.SetStateAction<never[]> = [];
@@ -40,10 +45,10 @@ const AppContainer: React.FC = () => {
 
   return (
 
-    <Provider store={store}>
       <App updateBeerList={updateBeerList} beersList={beersList} />
-    </Provider>
+
   );
 }
 
 export default AppContainer;
+
