@@ -8,10 +8,10 @@ const initialState = {
 export const beersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BEERS: {
-      return { ...state, beers: [...state.beers, action.payload] }
+      return { ...state, beers: action.payload }
     }
     case SET_BEERS: {
-      return { ...state, beers: [...state.beers, action.payload] }
+      return { ...state, beers: action.payload }
     }
     default:
       return state

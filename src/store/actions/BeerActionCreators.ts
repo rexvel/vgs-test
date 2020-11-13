@@ -31,7 +31,7 @@ action creators for berry`s data
 
 export const setBerry = (berrys) => ({
   type: SET_BERRYS,
-  payload: berrys,
+  payload: berrys.results,
 });
 
 
