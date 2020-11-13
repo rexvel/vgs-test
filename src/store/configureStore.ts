@@ -5,12 +5,10 @@ import createSagaMiddleware from 'redux-saga'
 import { applyMiddleware } from "redux";
 import { berrysReducer } from "./reducers/BerryReducer";
 
-
 export const rootReducer = combineReducers({
   beerState: beersReducer,
   berryState: berrysReducer
 });
-
 
 declare global {
   interface Window {

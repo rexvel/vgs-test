@@ -1,7 +1,4 @@
-import { BeersListItem } from 'components/BeersListItem';
 import React from "react";
-
-
 
 export const Test = () => {
 
@@ -12,5 +9,4 @@ export const Test = () => {
   );
 }
 
-
-export default Test
+export default Test;

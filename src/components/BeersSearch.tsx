@@ -4,13 +4,12 @@ import _ from "lodash";
 import { getPokemon, getBeer } from 'utils/request-data';
 
 
-interface IBeersItem {
+type BeersItem = {
   updateBeerList: Function,
 }
 
-const Search = ({ updateBeerList }: IBeersItem) => {
+const Search: React.FC<BeersItem> = ({ updateBeerList }) => {
 
-  const [updatedData, setUpdatedData] = useState([])
   const [userQuery, setUserQuery] = useState("");
 
   const debouncedGetPokemon = useRef(_.debounce(info => getPokemon(info, updateBeerList), 1000)).current;
@@ -29,8 +28,5 @@ const Search = ({ updateBeerList }: IBeersItem) => {
     </div>
   );
 }
-
-
-
 
 export default Search;

@@ -1,15 +1,15 @@
-import React, { SetStateAction, useState } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import BeersSearch from 'components/BeersSearch';
 import BeersList from 'components/BeersList';
 import { connect } from "react-redux";
-import { loadBeer, loadBerry } from 'store/actions/BeerActionCreators';
-import IAppState from 'types/IAppState.interface';
+import { loadBeer } from 'store/actions/BeerActionCreators';
+import IAppState from './types/AppState.interface';
 import { useEffect } from 'react';
 import _ from 'lodash';
+import { loadBerry } from 'store/actions/BerryActionCreators';
 
 
-interface AppProps {
+type AppProps = {
   beersList: any
   updateBeerList: Function,
   getBeers: Function,
@@ -19,7 +19,7 @@ interface AppProps {
 }
 
 
-const App: React.FC<AppProps> = ({ getBeers, getBerrys, beers, berrys, updateBeerList, beersList }: AppProps) => {
+const App: React.FC<AppProps> = ({ getBeers, getBerrys, beers, berrys, updateBeerList, beersList }) => {
 
   // const [beersList, setbeersList] = useState([])
 
@@ -40,9 +40,7 @@ const App: React.FC<AppProps> = ({ getBeers, getBerrys, beers, berrys, updateBee
     arrayItems.push(berryArray[i]);
   }
 
-
   console.log(arrayItems)
-
 
   const AppWrapper = {
     margin: "200px auto",
@@ -76,4 +74,5 @@ const mapDispatchToProps = (dispatch: any) => {
     getBerrys: () => dispatch(loadBerry()),
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

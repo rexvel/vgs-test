@@ -1,10 +1,6 @@
 import React, { SetStateAction, useEffect, useState } from 'react';
-import {Router} from 'react-router-dom'
 import { getData } from 'utils/request-data';
 import apiConstants from './constants';
-import {  Provider } from "react-redux";
-import { store } from "./store/configureStore";
-import history from './helpers/history';
 import App from 'App';
 
 const AppContainer: React.FC = () => {
@@ -51,4 +47,3 @@ const AppContainer: React.FC = () => {
 }
 
 export default AppContainer;
-

@@ -1,4 +1,4 @@
-import { beerEnum, berryEnum } from "../actions/DataActionTypes.enum";
+import { beerEnum } from "../../types/DataActionTypes.enum";
 
 const { ADD_BEERS, SET_BEERS } = beerEnum
 const initialState = {
@@ -8,14 +8,14 @@ const initialState = {
 export const beersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BEERS: {
-      return { ...state, beers: action.payload }
+      return { ...state, beers:[...state.beers, action.payload] }
     }
     case SET_BEERS: {
       return { ...state, beers: action.payload }
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default beersReducer
+export default beersReducer;

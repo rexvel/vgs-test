@@ -2,16 +2,16 @@ import { BeersListItem } from 'components/BeersListItem';
 import React from "react";
 
 
-interface IBeerList {
+type IBeerList = {
   beersList: Array<any>,
 }
 
 
 const BeerListStyle = {
-  marginTop:"50px",
+  marginTop: "50px",
 }
 
-export const BeersList = ({ beersList }: IBeerList) => {
+export const BeersList: React.FC<IBeerList> = ({ beersList }) => {
 
   console.log(beersList)
   return (
@@ -26,4 +26,4 @@ export const BeersList = ({ beersList }: IBeerList) => {
 }
 
 
-export default BeersList
+export default BeersList;

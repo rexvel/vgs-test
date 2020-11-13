@@ -1,22 +1,22 @@
-import { Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom'
-import Card from '@material-ui/core/Card/Card';
-import CardContent from '@material-ui/core/CardContent/CardContent';
-import { makeStyles } from '@material-ui/core/styles';
 import React from "react";
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card/Card';
+import { Link } from 'react-router-dom'
+import CardContent from '@material-ui/core/CardContent/CardContent';
 
 
-interface INestedBeerItem {
+type NestedBeerItem = {
   name: string,
   description: string,
   url: string,
 }
 
-interface IBeersItem {
-  item: INestedBeerItem,
+type BeersItem = {
+  item: NestedBeerItem,
 }
 
-export const BeersListItem: React.FC<IBeersItem> = ({ item }: IBeersItem) => {
+export const BeersListItem: React.FC<BeersItem> = ({ item }) => {
 
   const loading = item !== undefined;
 
@@ -29,13 +29,12 @@ export const BeersListItem: React.FC<IBeersItem> = ({ item }: IBeersItem) => {
       }
     </>
   );
-}
-
-
+};
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    marginTop: 20,
   },
   bullet: {
     display: 'inline-block',
@@ -50,15 +49,11 @@ const useStyles = makeStyles({
   },
 });
 
-
-
-
-export const UpdatedItem = ({ item }: IBeersItem) => {
+export const UpdatedItem: React.FC<BeersItem>= ({ item }) => {
 
   const classes = useStyles();
 
-
-  const { name, description, url } = item;
+  const { name, description } = item;
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -66,15 +61,10 @@ export const UpdatedItem = ({ item }: IBeersItem) => {
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           <Link to={'item'} >{name}</Link>
         </Typography>
-        <Typography variant="h5" component="h2">
-        </Typography>
         <Typography className={classes.pos} color="textSecondary">
           {description}
-        </Typography>
-        <Typography variant="body2" component="p">
-
         </Typography>
       </CardContent>
     </Card>
   );
-}
+};

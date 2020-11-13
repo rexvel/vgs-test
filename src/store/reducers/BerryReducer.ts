@@ -1,10 +1,10 @@
-import { berryEnum } from "../actions/DataActionTypes.enum";
+import { berryEnum } from "../../types/DataActionTypes.enum";
 
-const { ADD_BERRYS, SET_BERRYS } = berryEnum
+const { ADD_BERRYS, SET_BERRYS } = berryEnum;
 
 const initialState = {
   berrys: []
-}
+};
 
 export const berrysReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,4 +17,4 @@ export const berrysReducer = (state = initialState, action) => {
     default:
       return state
   }
-}
+};
