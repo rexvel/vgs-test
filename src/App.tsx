@@ -1,37 +1,79 @@
-import React, { } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BeersSearch from 'components/Beers/BeersSearch';
-import BeersList from 'components/Beers/BeersList';
+import React, { SetStateAction, useState } from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+import BeersSearch from 'components/BeersSearch';
+import BeersList from 'components/BeersList';
+import { connect } from "react-redux";
+import { loadBeer, loadBerry } from 'store/actions/BeerActionCreators';
+import IAppState from 'types/IAppState.interface';
+import { useEffect } from 'react';
+import _ from 'lodash';
 
 
 interface AppProps {
+  beersList: any
   updateBeerList: Function,
-  beersList: Array<any>,
+  getBeers: Function,
+  getBerrys: Function,
+  beers: any,
+  berrys: any
 }
 
-const App: React.FC<AppProps> = ({ updateBeerList, beersList }: AppProps) => {
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      margin: "200px auto",
-      width: "30vw",
-    },
-    paper: {
-      maxWidth: 400,
-      margin: `${theme.spacing(1)}px auto`,
-      padding: theme.spacing(2),
-    },
-  }));
+const App: React.FC<AppProps> = ({ getBeers, getBerrys, beers, berrys, updateBeerList, beersList }: AppProps) => {
 
-  const classes = useStyles();
+  // const [beersList, setbeersList] = useState([])
 
+  // const updateBeerList = (childData: SetStateAction<never[]>) => setbeersList(childData)
+
+  useEffect(() => {
+    getBeers()
+    getBerrys()
+  }, [getBeers, getBerrys])
+  const arrayItems: any = [];
+
+
+  const beerArray = _.sampleSize(beers, 3)
+  const berryArray = _.sampleSize(berrys, 3)
+
+  for (let i = 0; i < 3; i++) {
+    arrayItems.push(beerArray[i]);
+    arrayItems.push(berryArray[i]);
+  }
+
+
+  console.log(arrayItems)
+
+
+  const AppWrapper = {
+    margin: "200px auto",
+    width: "30vw",
+  }
   return (
 
-    <div className={classes.root}>
+    <div style={AppWrapper}>
       <BeersSearch updateBeerList={updateBeerList} />
-      <BeersList beersList={beersList} />
+      {
+        arrayItems.length > 0
+          ? (
+            <BeersList beersList={beersList} />
+          )
+          : <p>loading</p>
+      }
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (store: IAppState) => {
+  return {
+    beers: store.beerState.beers,
+    berrys: store.berryState.berrys,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getBeers: () => dispatch(loadBeer()),
+    getBerrys: () => dispatch(loadBerry()),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

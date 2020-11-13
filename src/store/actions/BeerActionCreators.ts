@@ -1,15 +1,10 @@
-export const ADD_BEERS = "ADD_BEERS";
-export const SET_BEERS = "SET_BEERS";
-export const LOAD_BEERS = "LOAD_BEERS";
-
-export const ADD_BERRYS = "ADD_BERRYS";
-export const SET_BERRYS= "SET_BERRYS";
-export const LOAD_BERRYS= "LOAD_BERRYS";
+import { beerEnum, berryEnum } from "./DataActionTypes.enum";
 
 /*
 action creators for beer`s data
 */
 
+const { ADD_BEERS, SET_BEERS, LOAD_BEERS } = beerEnum;
 export const addBeer = (beers) => ({
   type: ADD_BEERS,
   payload: beers,
@@ -28,6 +23,9 @@ export const loadBeer = () => ({
 /*
 action creators for berry`s data
 */
+
+const { SET_BERRYS, ADD_BERRYS, LOAD_BERRYS } = berryEnum
+
 
 export const setBerry = (berrys) => ({
   type: SET_BERRYS,

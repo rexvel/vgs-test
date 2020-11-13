@@ -1,6 +1,6 @@
-import { ADD_BEERS, SET_BEERS } from 'store/actions/BeerActionCreators';
+import { beerEnum, berryEnum } from "../actions/DataActionTypes.enum";
 
-// Wrap array in obj
+const { ADD_BEERS, SET_BEERS } = beerEnum
 const initialState = {
   beers: [],
 }
@@ -17,6 +17,5 @@ export const beersReducer = (state = initialState, action) => {
       return state
   }
 }
-
 
 export default beersReducer

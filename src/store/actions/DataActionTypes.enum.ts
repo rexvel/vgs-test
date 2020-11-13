@@ -1,7 +1,13 @@
 
-enum DataActionTypes {
-  GET_BEER_REQUEST_API_DATA = "GET_BEER_REQUEST_API_DATA",
-  GET_BEER_SUCCESS = 'GET_BEER_SUCCESS',
-  GET_BEER_FAILURE = 'GET_BEER_FAILURE'
+
+export enum berryEnum {
+  ADD_BERRYS = "ADD_BERRYS",
+  SET_BERRYS = "SET_BERRYS",
+  LOAD_BERRYS = "LOAD_BERRYS",
 }
-export default DataActionTypes;
+
+export enum beerEnum {
+  ADD_BEERS = "ADD_BEERS",
+  SET_BEERS = "SET_BEERS",
+  LOAD_BEERS = "LOAD_BEERS",
+}
