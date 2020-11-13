@@ -1,14 +1,29 @@
 import Grid from '@material-ui/core/Grid';
+import IAppState from '../../store/IAppState.interface';
 import { BeersListItem } from 'components/Beers/BeersListItem';
+import { connect } from 'react-redux';
 import React from "react";
+import { loadBeer, loadBerry } from 'store/actions/BeerActionCreators';
+import { useEffect } from 'react';
 
 
 interface IBeerList {
   beersList: Array<any>,
+  getBeers: Function,
+  getBerrys: Function,
+
 }
 
-const BeersList = ({ beersList }: IBeerList) => {
+export const BeersList = ({ beersList, getBeers,getBerrys }: IBeerList) => {
   console.log(beersList)
+
+
+
+  useEffect(() => {
+    getBeers()
+    getBerrys()
+  }, [getBeers,getBerrys])
+
 
 
   console.log(beersList)
@@ -27,6 +42,24 @@ const BeersList = ({ beersList }: IBeerList) => {
       })}
     </Grid>
   );
+
+
+
+  // Connect the app aware container to the store and reducers
+
 }
 
-export default BeersList;
+const mapStateToProps = (store: IAppState) => {
+  return {
+    beers: store.beerState.beers,
+    isFetching: store.beerState.isFetching,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getBeers: () => dispatch(loadBeer()),
+    getBerrys: () => dispatch(loadBerry()),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BeersList);

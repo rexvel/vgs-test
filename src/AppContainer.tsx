@@ -1,13 +1,14 @@
 import React, { SetStateAction, useEffect, useState } from 'react';
 import { getData } from 'utils/request-data';
-import { apiUrl } from './constants/apiConstants';
+import apiConstants from './constants';
 import App from 'App';
+import { Provider } from "react-redux";
+import { store } from "./store/configureStore";
+
 
 const AppContainer: React.FC = () => {
 
-  const { POKEMON_URL, BEER_URL } = apiUrl
-
-
+  const { POKEMON_URL, BEER_URL } = apiConstants
 
   const [pokemonArray, setPokemonArray] = useState([]);
   const [beerArray, setBeerArray] = useState([]);
@@ -18,7 +19,7 @@ const AppContainer: React.FC = () => {
   useEffect(() => {
     getData(BEER_URL, setBeerArray)
     getData(POKEMON_URL, setPokemonArray)
-  }, []);
+  }, [POKEMON_URL,BEER_URL]);
 
   useEffect(() => {
     const arrayItems: React.SetStateAction<never[]> = [];
@@ -39,9 +40,9 @@ const AppContainer: React.FC = () => {
 
   return (
 
-    <>
+    <Provider store={store}>
       <App updateBeerList={updateBeerList} beersList={beersList} />
-    </>
+    </Provider>
   );
 }
 
