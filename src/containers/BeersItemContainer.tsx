@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectItemById } from '../store/selectors';
 import { routePaths } from '../routes';
 import { Row, Panel, FlexboxGrid, Tag } from "rsuite";
+import { Header } from "components";
 
 const colorsByType = {
   beer: "orange",
@@ -27,6 +28,8 @@ const BeersItemContainer: React.FC = () => {
   const { name, type, description } = currentItem
 
   return (
+    <>
+    <Header title="Beers List" />
     <FlexboxGrid justify="center" style={{ margin: "0 auto", width: "50%", height: "100%" }} align="middle" >
       <Row key={id} style={BeersItemStyles} >
         <h3>{name}</h3>
@@ -42,6 +45,7 @@ const BeersItemContainer: React.FC = () => {
         </Panel>
       </Row>
     </FlexboxGrid>
+    </>
   );
 }
 

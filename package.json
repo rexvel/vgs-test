@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "faker": "^5.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.2",
@@ -10,8 +11,15 @@
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
+    "reselect": "^4.0.0",
     "rsuite": "^4.8.4",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "uuid": "^8.3.1",
+    "@types/lodash": "^4.14.165",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.11",
+    "@types/redux": "^3.6.0"
   },
   "scripts": {
     "start": " set PORT=3001 && react-scripts start",
@@ -35,10 +43,6 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.165",
-    "@types/react-redux": "^7.1.11",
-    "@types/redux": "^3.6.0",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.8"
+
   }
 }

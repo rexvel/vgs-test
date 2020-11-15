@@ -3,6 +3,7 @@ import { Row, Panel, Tag } from "rsuite";
 import { Link } from 'react-router-dom';
 import FlexboxGrid from "rsuite/lib/FlexboxGrid/FlexboxGrid";
 import { routePaths } from "routes";
+import Header from "./Header";
 
 const beerRowStyles = {
   marginBottom: 10,
@@ -21,18 +22,20 @@ export type BeersListItemType = {
 export const BeersListItem: React.FC<BeersListItemType> = ({ name, id, type }) => {
 
   return (
-    <Row style={beerRowStyles} key={id}>
-      <Panel bordered>
-        <FlexboxGrid justify="center">
-          <FlexboxGrid.Item colspan={6}>
-            <Tag color={colorsByType[type]}>{type}</Tag>
-          </FlexboxGrid.Item>
-          <FlexboxGrid.Item colspan={18}>
-            <Link to={routePaths.beersItemPage(id)} >{name}</Link>
-          </FlexboxGrid.Item>
-        </FlexboxGrid>
-      </Panel>
-    </Row>
+    <>
+      <Row style={beerRowStyles} key={id}>
+        <Panel bordered>
+          <FlexboxGrid justify="center">
+            <FlexboxGrid.Item colspan={6}>
+              <Tag color={colorsByType[type]}>{type}</Tag>
+            </FlexboxGrid.Item>
+            <FlexboxGrid.Item colspan={18}>
+              <Link to={routePaths.beersItemPage(id)} >{name}</Link>
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
+        </Panel>
+      </Row>
+    </>
   );
 }
 

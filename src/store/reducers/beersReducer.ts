@@ -13,11 +13,6 @@ export const beersReducer = (state = initialState, { type, payload }:BeersAction
         ...state,
         beersList: payload?.beersList ?? state.beersList,
       }
-    // case BeersActionTypes.BEERS_ACTIVE_ITEM_SET:
-    //   return {
-    //     ...state,
-    //     activeItem: payload?.activeItem ?? state.activeItem
-    //   }
     case BeersActionTypes.BEERS_DATA_CLEAR:
       return initialState;
     default:
