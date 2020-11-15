@@ -1,16 +1,15 @@
+import { BEER_URL, POKEMON_URL } from "../constants";
 
-//TODO axios
+const getBeersFromApi = async (name?: string):Promise<any> => {
+  const result = await fetch(BEER_URL(name));
 
-import apiConstants from "../constants";
-
-const { BEER_URL, POKEMON_URL } = apiConstants
-
-export const getBeersFromApi = async () => {
-  const result = await fetch(BEER_URL)
   return result.json();
 }
 
-export const getBerryFromApi = async () => {
-  const result = await fetch(POKEMON_URL)
+const getBerryFromApi = async (name?: string):Promise<any> => {
+  const result = await fetch(POKEMON_URL(name));
+
   return result.json();
 }
+
+export default { getBeersFromApi, getBerryFromApi };

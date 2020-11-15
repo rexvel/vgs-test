@@ -1,70 +1,39 @@
 import React from "react";
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card/Card';
-import { Link } from 'react-router-dom'
-import CardContent from '@material-ui/core/CardContent/CardContent';
+import { Row, Panel, Tag } from "rsuite";
+import { Link } from 'react-router-dom';
+import FlexboxGrid from "rsuite/lib/FlexboxGrid/FlexboxGrid";
+import { routePaths } from "routes";
 
-
-type NestedBeerItem = {
-  name: string,
-  description: string,
-  url: string,
+const beerRowStyles = {
+  marginBottom: 10,
+}
+const colorsByType = {
+  beer: "orange",
+  pokemon: "green",
 }
 
-type BeersItem = {
-  item: NestedBeerItem,
+export type BeersListItemType = {
+  name: string;
+  id: string;
+  type: string;
 }
 
-export const BeersListItem: React.FC<BeersItem> = ({ item }) => {
-
-  const loading = item !== undefined;
+export const BeersListItem: React.FC<BeersListItemType> = ({ name, id, type }) => {
 
   return (
-    <>
-      {
-        loading
-          ? <UpdatedItem item={item} />
-          : <p>loading</p>
-      }
-    </>
+    <Row style={beerRowStyles} key={id}>
+      <Panel bordered>
+        <FlexboxGrid justify="center">
+          <FlexboxGrid.Item colspan={6}>
+            <Tag color={colorsByType[type]}>{type}</Tag>
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={18}>
+            <Link to={routePaths.beersItemPage(id)} >{name}</Link>
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+      </Panel>
+    </Row>
   );
-};
+}
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-    marginTop: 20,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
-export const UpdatedItem: React.FC<BeersItem>= ({ item }) => {
-
-  const classes = useStyles();
-
-  const { name, description } = item;
-
-  return (
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          <Link to={'item'} >{name}</Link>
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {description}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
-};
+export default BeersListItem;

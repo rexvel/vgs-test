@@ -1,13 +1,11 @@
 import { createStore, combineReducers, compose } from "redux";
-import beersReducer from "./reducers/BeerReducer";
-import rootSaga from './rootSaga';
+import beersReducer from "./reducers/beersReducer";
+import { rootSaga } from './sagas';
 import createSagaMiddleware from 'redux-saga'
 import { applyMiddleware } from "redux";
-import { berrysReducer } from "./reducers/BerryReducer";
 
 export const rootReducer = combineReducers({
-  beerState: beersReducer,
-  berryState: berrysReducer
+  beers: beersReducer,
 });
 
 declare global {

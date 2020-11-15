@@ -1,5 +1,4 @@
-
 export default {
   homePage: () => '/',
-  itemComponent: () => '/item',
+  beersItemPage: (id: string) => `/beers-item/${id}`,
 };
