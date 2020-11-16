@@ -5,7 +5,7 @@ API
 
 ## Starting the app
 
-There two way to setup application: by Docker and manually by using package managers(npm, yarn, etc);
+There are  two ways to setup application: by Docker and manually by using package managers(npm, yarn, etc);
 
 ## Docker way
 
